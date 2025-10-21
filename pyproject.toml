@@ -1,0 +1,86 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ds_planner"
+version = "0.1.0"
+description = "A Python library for distribution substation planning toolkit"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Han Li", email = "hanli@lbl.gov"}]
+maintainers = [{name = "Han Li", email = "hanli@lbl.gov"}]
+keywords = ["power systems", "distribution", "substation", "planning"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+]
+dependencies = [
+    "pandas>=2.0.0",
+    "darts>=0.24.0",
+    "numpy==1.26.4",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=6.0",
+    "black>=24.0",
+    "isort>=5.0",
+    "flake8>=7.0",
+    "mypy>=1.6",
+    "ipykernel"
+]
+docs = [
+    "sphinx>=8.0",
+    "sphinx-rtd-theme>=3.0",
+    "myst-parser>=4.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/tsbyq/ds_planner"
+Repository = "https://github.com/tsbyq/ds_planner.git"
+"Bug Tracker" = "https://github.com/tsbyq/ds_planner/issues"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+packages = [
+    "ds_planner",
+    "ds_planner.data"
+]
+
+[tool.setuptools.package-data]
+ds_planner = ["py.typed"]
+"ds_planner.data" = ["*.csv", "*.parquet"]  # Include all csv and parquet files
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q --doctest-modules"
+testpaths = [
+    "tests",
+]
+
+[tool.black]
+line-length = 88
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+line_length = 88
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
